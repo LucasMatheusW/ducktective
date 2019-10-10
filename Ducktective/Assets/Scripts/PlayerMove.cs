@@ -21,7 +21,13 @@ public class PlayerMove : MonoBehaviour
     {
         InputCharacter();
         transform.Translate(direction * speed * Time.deltaTime);
-        AnimateChar(direction);
+        if (direction.x != 0 || direction.y != 0) 
+        {
+            AnimateChar(direction);
+        } else
+        {
+            animate.SetLayerWeight(1, 0);
+        }
     }
 
     void InputCharacter()
@@ -47,6 +53,8 @@ public class PlayerMove : MonoBehaviour
 
     void AnimateChar(Vector2 dir)
     {
+        animate.SetLayerWeight(1,1);
+
         animate.SetFloat("x", dir.x);
         animate.SetFloat("y", dir.y);
     }
