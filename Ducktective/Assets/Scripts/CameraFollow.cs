@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class CameraFollow : MonoBehaviour
 {
-    
     public Transform target;
     private float xMax, xMin, yMax, yMin;
     [SerializeField]

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: tilemap-casa-1_3
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300006, guid: 6629b3980735d0f45b9622c4941bb87f, type: 3}
+  m_Sprite: {fileID: 21300006, guid: 58a318367137f2d489ef84a2530b878c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
