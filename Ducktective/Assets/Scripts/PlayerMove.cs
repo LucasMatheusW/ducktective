@@ -4,29 +4,39 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
     private float speed;
     private Vector2 direction;
     public Animator animate;
+    public bool canMove;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         speed = 2;
         direction = Vector2.zero;
+        canMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        InputCharacter();
-        transform.Translate(direction * speed * Time.deltaTime);
-        if (direction.x != 0 || direction.y != 0) 
+            InputCharacter();
+            if (direction.x != 0 || direction.y != 0) 
+            {
+                AnimateChar(direction);
+            } else
+            {
+                animate.SetLayerWeight(1, 0);
+            }
+    }
+
+    private void FixedUpdate() 
+    {
+        if(canMove)
         {
-            AnimateChar(direction);
-        } else
-        {
-            animate.SetLayerWeight(1, 0);
+            rb.MovePosition(rb.position+(direction * speed * Time.deltaTime));
         }
     }
 
