@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fungus;
 
 public class PlayerMove : MonoBehaviour
 {
     private float speed;
     private Vector2 direction;
     public Animator animate;
-    public bool canMove;
     private Rigidbody2D rb;
+    [SerializeField]
+    private Flowchart fc;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +18,13 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         speed = 2;
         direction = Vector2.zero;
-        canMove = true;
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if(!fc.GetBooleanVariable("Var"))
+        {
             InputCharacter();
             if (direction.x != 0 || direction.y != 0) 
             {
@@ -30,11 +33,12 @@ public class PlayerMove : MonoBehaviour
             {
                 animate.SetLayerWeight(1, 0);
             }
+        }   
     }
 
     private void FixedUpdate() 
     {
-        if(canMove)
+        if(!fc.GetBooleanVariable("Var"))
         {
             rb.MovePosition(rb.position+(direction * speed * Time.deltaTime));
         }

@@ -10,6 +10,7 @@ TagManager:
   - Clyde
   - Tesoura
   - Sorvete
+  - Item
   layers:
   - Default
   - TransparentFX

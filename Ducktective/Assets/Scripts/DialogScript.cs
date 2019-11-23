@@ -26,14 +26,15 @@ public class DialogScript : MonoBehaviour
                 if(character.tag == "Clyde")
                 {
                     fc.ExecuteBlock("ClydeDialog");
-                }
-                if(character.tag == "Tesoura")
-                {
-                    fc.ExecuteBlock("FoundScisors");
                 }  
-                if(character.tag == "Sorvete")
+                if(character.tag == "Item")
                 {
-                    fc.ExecuteBlock("FoundIceCream");
+                    if(character.GetComponent<ItemColected>().item.nome == "tesoura"){
+                        fc.ExecuteBlock("FoundScisors");
+                    } else if(character.GetComponent<ItemColected>().item.nome == "sorvete"){
+                        fc.ExecuteBlock("FoundIceCream");
+                    }
+                    character.GetComponent<Interact>().OnFocus();
                 } 
             }   
         }
