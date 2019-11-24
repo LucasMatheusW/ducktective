@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
+using UnityEngine.UI;
 
 public class DialogScript : MonoBehaviour
 {
@@ -29,14 +30,39 @@ public class DialogScript : MonoBehaviour
                 }  
                 if(character.tag == "Item")
                 {
-                    if(character.GetComponent<ItemColected>().item.nome == "tesoura"){
+                    if(character.GetComponent<ItemColected>().item.id == 0){
                         fc.ExecuteBlock("FoundScisors");
-                    } else if(character.GetComponent<ItemColected>().item.nome == "sorvete"){
+                    } else if(character.GetComponent<ItemColected>().item.id == 1){
                         fc.ExecuteBlock("FoundIceCream");
                     }
                     character.GetComponent<Interact>().OnFocus();
                 } 
             }   
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            fc.SetBooleanVariable("Var", true);
+            PlayerMove.canvas.GetComponent<Canvas>().targetDisplay = 0;
+            PlayerMove.textarea.SetActive(false);
+            GameObject [] slots = GameObject.FindGameObjectsWithTag("Slot");
+            foreach (GameObject s in slots)
+            {
+                s.GetComponent<Button>().enabled = true;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            if(PlayerMove.canvas.GetComponent<Canvas>().targetDisplay == 0){
+                PlayerMove.canvas.GetComponent<Canvas>().targetDisplay = 1;
+                PlayerMove.textarea.SetActive(false);
+                fc.SetBooleanVariable("Var", false);
+                GameObject [] slots = GameObject.FindGameObjectsWithTag("Slot");
+                foreach (GameObject s in slots)
+                {
+                    s.GetComponent<Button>().enabled = false;
+                }
+            }
         }
     }
 

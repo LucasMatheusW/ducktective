@@ -8,9 +8,10 @@ TagManager:
   - Enemy
   - Ducktective
   - Clyde
-  - Tesoura
-  - Sorvete
   - Item
+  - TextArea
+  - Inventory
+  - Slot
   layers:
   - Default
   - TransparentFX

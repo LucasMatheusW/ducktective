@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerMove : MonoBehaviour
     private Vector2 direction;
     public Animator animate;
     private Rigidbody2D rb;
+    public static GameObject canvas;
+    public static GameObject textarea;
     [SerializeField]
     private Flowchart fc;
 
@@ -18,6 +21,18 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         speed = 2;
         direction = Vector2.zero;
+        if(canvas == null){
+            canvas = GameObject.FindGameObjectsWithTag("Inventory")[0];
+        }
+        if(textarea == null){
+            textarea = GameObject.FindGameObjectsWithTag("TextArea")[0];
+        }
+        canvas.GetComponent<Canvas>().targetDisplay = 1;
+        GameObject [] slots = GameObject.FindGameObjectsWithTag("Slot");
+        foreach (GameObject s in slots)
+        {
+            s.GetComponent<Button>().enabled = false;
+        }
     }
 
     // Update is called once per frame
