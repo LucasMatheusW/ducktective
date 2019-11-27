@@ -12,6 +12,7 @@ TagManager:
   - TextArea
   - Inventory
   - Slot
+  - Character
   layers:
   - Default
   - TransparentFX

@@ -27,12 +27,7 @@ public class PlayerMove : MonoBehaviour
         if(textarea == null){
             textarea = GameObject.FindGameObjectsWithTag("TextArea")[0];
         }
-        canvas.GetComponent<Canvas>().targetDisplay = 1;
-        GameObject [] slots = GameObject.FindGameObjectsWithTag("Slot");
-        foreach (GameObject s in slots)
-        {
-            s.GetComponent<Button>().enabled = false;
-        }
+        canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,6 +43,12 @@ public class PlayerMove : MonoBehaviour
             {
                 animate.SetLayerWeight(1, 0);
             }
+        }
+        else
+        {
+            animate.SetFloat("x", direction.x);
+            animate.SetFloat("y", direction.y);
+            animate.SetLayerWeight(1, 0);
         }   
     }
 

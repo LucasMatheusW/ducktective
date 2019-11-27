@@ -22,19 +22,14 @@ public class DialogScript : MonoBehaviour
     {
         if (isOnDialogArea)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && fc.GetBooleanVariable("Var") == false)
             {   
-                if(character.tag == "Clyde")
+                if(character.tag == "Character")
                 {
-                    fc.ExecuteBlock("ClydeDialog");
-                }  
-                if(character.tag == "Item")
+                    fc.ExecuteBlock(character.GetComponent<CharDialog>().character.dialog);
+                } else if(character.tag == "Item")
                 {
-                    if(character.GetComponent<ItemColected>().item.id == 0){
-                        fc.ExecuteBlock("FoundScisors");
-                    } else if(character.GetComponent<ItemColected>().item.id == 1){
-                        fc.ExecuteBlock("FoundIceCream");
-                    }
+                    fc.ExecuteBlock(character.GetComponent<ItemColected>().item.dialog);
                     character.GetComponent<Interact>().OnFocus();
                 } 
             }   
@@ -43,25 +38,15 @@ public class DialogScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             fc.SetBooleanVariable("Var", true);
-            PlayerMove.canvas.GetComponent<Canvas>().targetDisplay = 0;
+            PlayerMove.canvas.SetActive(true);
             PlayerMove.textarea.SetActive(false);
-            GameObject [] slots = GameObject.FindGameObjectsWithTag("Slot");
-            foreach (GameObject s in slots)
-            {
-                s.GetComponent<Button>().enabled = true;
-            }
         }
 
         if(Input.GetKeyDown(KeyCode.Escape)){
-            if(PlayerMove.canvas.GetComponent<Canvas>().targetDisplay == 0){
-                PlayerMove.canvas.GetComponent<Canvas>().targetDisplay = 1;
+            if(PlayerMove.canvas.activeSelf){
+                PlayerMove.canvas.SetActive(false);
                 PlayerMove.textarea.SetActive(false);
                 fc.SetBooleanVariable("Var", false);
-                GameObject [] slots = GameObject.FindGameObjectsWithTag("Slot");
-                foreach (GameObject s in slots)
-                {
-                    s.GetComponent<Button>().enabled = false;
-                }
             }
         }
     }

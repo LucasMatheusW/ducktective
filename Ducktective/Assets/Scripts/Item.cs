@@ -11,7 +11,7 @@ public class Item : ScriptableObject
     [TextArea]
     public string desc;
     public Sprite icon;
-
+    public string dialog;
     public virtual void Use()
     {
         Debug.Log("Use "+nome);
